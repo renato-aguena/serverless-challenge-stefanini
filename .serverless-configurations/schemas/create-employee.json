@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "age": {
+      "type": "number",
+      "minItems": 18,
+      "maxItems": 110
+    },
+    "name": {
+      "type": "string",
+      "format": "/^[A-Za-z]+$/"
+    },
+    "role": {
+      "type": "string",
+      "format": "/^[A-Za-z]+$/"
+    }
+  },
+  "required": [
+    "age",
+    "name",
+    "role"
+  ]
+}

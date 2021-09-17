@@ -1,0 +1,40 @@
+service: ${env:SERVICE}
+
+provider:
+  runtime: nodejs14.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: ${env:REGION}
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - lambda:InvokeFunction
+        - lamnda:InvokeAsync
+      
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+# package:
+#   excludeDevDependencies: true
+#   exclude:
+#     - test/**
+#     - .gitignore
+#     - package-lock.json
+#     - README.md
+#     - .eslintignore
+#     - .eslintrc.json
+#     - jest.config.js
+
+functions:
+  createEmployee:
+    handler: src/controllers/base.postEmployee
+    events:
+      - http:
+          path: /employees
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(.serverless-configurations/schemas/create-employee.json)}

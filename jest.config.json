@@ -1,0 +1,14 @@
+{
+  "roots": ["<rootDir>/test"],
+  "clearMocks": true,
+  "collectCoverageFrom": ["<rootDir>/src/**/*.ts", "!<rootDir>/src/**/interfaces/**/*.ts"],
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coverageProvider": "v8",
+  "transform": {
+    ".+\\.ts$": "ts-jest"
+  },
+  "setupFiles": [
+    "dotenv/config"
+  ]
+}

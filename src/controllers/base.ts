@@ -14,7 +14,7 @@ const execute = async (request: HttpRequest, Controller, method: string): Promis
     return response
   } catch (error) {
     console.error(error)
-    return InternalServerError(error)
+    return InternalServerError(error.message)
   }
 }
 

@@ -11,5 +11,5 @@ export const NoContent = (): HttpResponse => ({
 
 export const InternalServerError = (body?): HttpResponse => ({
   statusCode: 500,
-  body: body ? JSON.stringify(body) : null
+  body
 })

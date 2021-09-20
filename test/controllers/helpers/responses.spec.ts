@@ -1,4 +1,4 @@
-import { Ok } from './../../../src/controllers/helpers/responses'
+import { InternalServerError, NoContent, Ok } from './../../../src/controllers/helpers/responses'
 
 describe('Responses Controller Helpers', () => {
   test('given a valid body should return Ok as expected', async () => {
@@ -16,5 +16,19 @@ describe('Responses Controller Helpers', () => {
 
     expect(result.statusCode).toBe(200)
     expect(result.body).toBeNull()
+  })
+
+  test('given a null body should return NoContent as expected', async () => {
+    const result = NoContent()
+
+    expect(result.statusCode).toBe(204)
+    expect(result.body).toBeUndefined()
+  })
+
+  test('given a valid body should return InternalServerError as expected', async () => {
+    const result = InternalServerError('server_error')
+
+    expect(result.statusCode).toBe(500)
+    expect(result.body).toEqual('server_error')
   })
 })

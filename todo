@@ -3,6 +3,7 @@
 - [x] Tratativa para retorno de erros na controller
 - [ ] Mudar a estrutura para uma com mais cara de Clean Architecture
 - [ ] README.md
+- [ ] Configurar Dynamo no serverless.yml
 - [ ] Publicação na AWS
 - [ ] Teste para deletar um id que não existe
 - [ ] Teste para buscar um id que não existe

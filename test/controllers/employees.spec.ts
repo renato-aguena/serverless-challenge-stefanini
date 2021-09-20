@@ -49,4 +49,17 @@ describe('Employees Controller', () => {
       expect(result.statusCode).toBe(204)
     })
   })
+
+  describe('delete employee', () => {
+    test('given a valid id should update as expected', async () => {
+      const input = {
+        pathParameters: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
+      }
+      jest.spyOn(employeesService, 'deleteEmployee').mockReturnValue(Promise.resolve())
+      const employeeController = new EmployeesController(input)
+  
+      const result = await employeeController.deleteEmployee()
+      expect(result.statusCode).toBe(204)
+    })
+  })
 })

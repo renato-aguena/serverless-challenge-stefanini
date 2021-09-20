@@ -24,6 +24,12 @@ class EmployeesController {
     })
     return NoContent()
   }
+
+  async deleteEmployee (): Promise<HttpResponse> {
+    const employeeId = this.request.pathParameters.id
+    await employeesService.deleteEmployee(employeeId)
+    return NoContent()
+  }
 }
 
 export default EmployeesController

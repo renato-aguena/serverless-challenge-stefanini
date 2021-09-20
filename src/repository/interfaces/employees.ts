@@ -12,6 +12,9 @@ export interface UpdateEmployee {
   name?: string
   age?: number
   role?: string
-  createdAt?: string
-  archived?: boolean
+}
+
+export interface DeleteEmployee {
+  id: string
+  archived: boolean
 }

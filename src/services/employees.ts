@@ -32,3 +32,16 @@ export const updateEmployee = async ({ id, employee }: { id: string, employee: E
     throw new Error('failed_update_employee')
   }
 }
+
+export const deleteEmployee = async (id: string): Promise<void> => {
+  try {
+    const employeeDelete = {
+      id,
+      archived: true
+    }
+    await employeeRepository.delete(employeeDelete)
+  } catch (error) {
+    console.log('deleteEmployee error', error)
+    throw new Error('failed_delete_employee')
+  }
+}

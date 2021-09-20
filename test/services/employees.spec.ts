@@ -68,4 +68,17 @@ describe('Employees Service', () => {
       employee
     })).rejects.toMatch('failed_update_employee')
   })
+
+  test('given a valid id should delete as expected', async () => {
+    jest.spyOn(employeeRepository, 'delete').mockReturnValue(Promise.resolve({}))
+    const deleteEmployeeCall = jest.spyOn(employeesService, 'deleteEmployee')
+    await employeesService.deleteEmployee('452fc281-b0c6-55ad-8493-07d7f44ced21')
+    expect(deleteEmployeeCall).toHaveBeenCalledWith('452fc281-b0c6-55ad-8493-07d7f44ced21')
+  })
+
+  test('given a valid employee to delete but disconect of database should throw error as expected', async () => {
+    jest.spyOn(employeeRepository, 'delete').mockImplementation(() => { throw new Error('failed_to_connect_to_database') })
+
+    expect(employeesService.deleteEmployee('452fc281-b0c6-55ad-8493-07d7f44ced21')).rejects.toMatch('failed_delete_employee')
+  })
 })

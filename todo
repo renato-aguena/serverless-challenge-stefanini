@@ -3,3 +3,4 @@
 - [ ] Testes Unitários
 - [ ] Husky / Testes coverage %
 - [ ] Publicação na AWS
+- [ ] Tratativa para retorno de erros na controller

@@ -16,6 +16,21 @@ plugins:
   - serverless-dotenv-plugin
   - serverless-offline
 
+resources:
+  Resources:
+    EmployeesTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Delete
+      Properties:
+        TableName: {env:TABLE_EMPLOYEES}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
 functions:
   createEmployee:
     handler: src/controllers/base.postEmployee

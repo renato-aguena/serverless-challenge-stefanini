@@ -36,4 +36,36 @@ describe('Employees Service', () => {
 
     expect(employeesService.createEmployee(employee)).rejects.toMatch('failed_create_employee')
   })
+
+  test('given a valid employee should update as expected', async () => {
+    const employee = {
+      name: 'Renato K. Aguena',
+      age: 27,
+      role: 'Desenvolvedor'
+    }
+    jest.spyOn(employeeRepository, 'update').mockReturnValue(Promise.resolve({}))
+    const updateEmployeeCall = jest.spyOn(employeesService, 'updateEmployee')
+    await employeesService.updateEmployee({
+      id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+      employee
+    })
+    expect(updateEmployeeCall).toHaveBeenCalledWith({
+      id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+      employee
+    })
+  })
+
+  test('given a valid employee to update but disconect of database should throw error as expected', async () => {
+    const employee = {
+      name: 'Renato K. Aguena',
+      age: 27,
+      role: 'Desenvolvedor'
+    }
+    jest.spyOn(employeeRepository, 'update').mockImplementation(() => { throw new Error('failed_to_connect_to_database') })
+
+    expect(employeesService.updateEmployee({
+      id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+      employee
+    })).rejects.toMatch('failed_update_employee')
+  })
 })

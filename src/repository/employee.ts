@@ -1,12 +1,18 @@
 import { DynamoDB } from 'aws-sdk'
 
 import config from './../config'
-import { Employee } from './interfaces/employees'
+import { CreateEmployee, UpdateEmployee } from './interfaces/employees'
 
 const docClient = new DynamoDB.DocumentClient({ region: config.AWS.REGION })
 
 export default {
-  create: (employee: Employee): Promise<any> => {
+  create: (employee: CreateEmployee): Promise<any> => {
+    return docClient.put({
+      TableName: 'employees',
+      Item: employee
+    }).promise()
+  },
+  update: (employee: UpdateEmployee): Promise<any> => {
     return docClient.put({
       TableName: 'employees',
       Item: employee
@@ -16,9 +22,6 @@ export default {
 
   // },
   // delete: (id) => {
-
-  // },
-  // update: (employee) => {
 
   // }
 }

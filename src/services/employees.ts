@@ -19,3 +19,16 @@ export const createEmployee = async (employee: Employee): Promise<Employee> => {
     throw new Error('failed_create_employee')
   }
 }
+
+export const updateEmployee = async ({ id, employee }: { id: string, employee: Employee}): Promise<void> => {
+  try {
+    const employeeUpdate = {
+      id,
+      ...employee
+    }
+    await employeeRepository.update(employeeUpdate)
+  } catch (error) {
+    console.log('updateEmployee error', error)
+    throw new Error('failed_update_employee')
+  }
+}

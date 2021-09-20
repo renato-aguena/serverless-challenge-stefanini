@@ -15,10 +15,5 @@
       "type": "string",
       "format": "/^[A-Za-z]+$/"
     }
-  },
-  "required": [
-    "age",
-    "name",
-    "role"
-  ]
+  }
 }

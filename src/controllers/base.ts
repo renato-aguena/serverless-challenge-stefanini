@@ -20,5 +20,8 @@ const execute = async (request: HttpRequest, Controller, method: string): Promis
 }
 
 export default {
-  postEmployee: async (request: HttpRequest) => await execute(request, EmployeesController, 'postEmployee')
+  postEmployee: async (request: HttpRequest) => await execute(request, EmployeesController, 'postEmployee'),
+  putEmployee: async (request: HttpRequest) => await execute(request, EmployeesController, 'putEmployee'),
+  deleteEmployee: async (request: HttpRequest) => await execute(request, EmployeesController, 'deleteEmployee'),
+  getEmployee: async (request: HttpRequest) => await execute(request, EmployeesController, 'getEmployee')
 }

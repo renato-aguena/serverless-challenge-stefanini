@@ -16,17 +16,6 @@ plugins:
   - serverless-dotenv-plugin
   - serverless-offline
 
-# package:
-#   excludeDevDependencies: true
-#   exclude:
-#     - test/**
-#     - .gitignore
-#     - package-lock.json
-#     - README.md
-#     - .eslintignore
-#     - .eslintrc.json
-#     - jest.config.js
-
 functions:
   createEmployee:
     handler: src/controllers/base.postEmployee
@@ -38,3 +27,38 @@ functions:
           request:
             schema:
               application/json: ${file(.serverless-configurations/schemas/create-employee.json)}
+
+  updateEmployee:
+    handler: src/controllers/base.putEmployee
+    events:
+      - http:
+          path: /employees
+          method: put
+          cors: true
+          request:
+            schema:
+              application/json: ${file(.serverless-configurations/schemas/update-employee.json)}
+
+  deleteEmployee:
+    handler: src/controllers/base.deleteEmployee
+    events:
+      - http:
+          path: /employees/{id}
+          method: delete
+          cors: true
+          request:
+            parameters:
+              paths:
+                id: true
+
+  getEmployee:
+    handler: src/controllers/base.getEmployee
+    events:
+      - http:
+          path: /employees/{id}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                id: true

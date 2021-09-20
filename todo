@@ -1,8 +1,10 @@
-- [ ] README.md
-- [ ] PUT, GET, DELETE
-- [ ] Testes Unitários
-- [ ] Husky / Testes coverage %
-- [ ] Publicação na AWS
+- [x] Husky / Testes coverage %
+- [x] Validators do API Gateway para os bodies de put
 - [ ] Tratativa para retorno de erros na controller
+- [ ] Mudar a estrutura para uma com mais cara de Clean Architecture
+- [ ] README.md
+- [ ] Publicação na AWS
 - [ ] Teste para deletar um id que não existe
 - [ ] Teste para buscar um id que não existe
+- [x] PUT, GET, DELETE
+- [x] Testes Unitários

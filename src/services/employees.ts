@@ -15,7 +15,6 @@ export const createEmployee = async (employee: Employee): Promise<Employee> => {
     await employeeRepository.create(employee)
     return employee
   } catch (error) {
-    console.log('createEmployee error', error)
     throw new Error('failed_create_employee')
   }
 }
@@ -28,7 +27,6 @@ export const updateEmployee = async ({ id, employee }: { id: string, employee: E
     }
     await employeeRepository.update(employeeUpdate)
   } catch (error) {
-    console.log('updateEmployee error', error)
     throw new Error('failed_update_employee')
   }
 }
@@ -41,7 +39,6 @@ export const deleteEmployee = async (id: string): Promise<void> => {
     }
     await employeeRepository.delete(employeeDelete)
   } catch (error) {
-    console.log('deleteEmployee error', error)
     throw new Error('failed_delete_employee')
   }
 }
@@ -51,7 +48,6 @@ export const searchEmployee = async (id: string): Promise<Employee> => {
     const employee = await employeeRepository.search(id)
     return employee
   } catch (error) {
-    console.log('searchEmployee error', error)
     throw new Error('failed_search_employee')
   }
 }

@@ -8,3 +8,8 @@ export const Ok = (body?: any): HttpResponse => ({
 export const NoContent = (): HttpResponse => ({
   statusCode: 204
 })
+
+export const InternalServerError = (body?): HttpResponse => ({
+  statusCode: 500,
+  body: body ? JSON.stringify(body) : null
+})

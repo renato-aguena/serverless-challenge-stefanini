@@ -1,4 +1,5 @@
 import EmployeesController from './employees.controller'
+import { InternalServerError } from './helpers/responses'
 import { HttpRequest, HttpResponse } from './interfaces/http'
 
 const execute = async (request: HttpRequest, Controller, method: string): Promise<HttpResponse> => {
@@ -12,10 +13,8 @@ const execute = async (request: HttpRequest, Controller, method: string): Promis
     const response = await controller[method]()
     return response
   } catch (error) {
-    return {
-      body: JSON.stringify(error),
-      statusCode: 500
-    }
+    console.error(error)
+    return InternalServerError(error)
   }
 }
 

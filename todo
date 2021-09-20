@@ -1,6 +1,6 @@
 - [x] Husky / Testes coverage %
 - [x] Validators do API Gateway para os bodies de put
-- [ ] Tratativa para retorno de erros na controller
+- [x] Tratativa para retorno de erros na controller
 - [ ] Mudar a estrutura para uma com mais cara de Clean Architecture
 - [ ] README.md
 - [ ] Publicação na AWS

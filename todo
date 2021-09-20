@@ -4,3 +4,5 @@
 - [ ] Husky / Testes coverage %
 - [ ] Publicação na AWS
 - [ ] Tratativa para retorno de erros na controller
+- [ ] Teste para deletar um id que não existe
+- [ ] Teste para buscar um id que não existe

@@ -45,3 +45,13 @@ export const deleteEmployee = async (id: string): Promise<void> => {
     throw new Error('failed_delete_employee')
   }
 }
+
+export const searchEmployee = async (id: string): Promise<Employee> => {
+  try {
+    const employee = await employeeRepository.search(id)
+    return employee
+  } catch (error) {
+    console.log('searchEmployee error', error)
+    throw new Error('failed_search_employee')
+  }
+}

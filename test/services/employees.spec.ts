@@ -81,4 +81,30 @@ describe('Employees Service', () => {
 
     expect(employeesService.deleteEmployee('452fc281-b0c6-55ad-8493-07d7f44ced21')).rejects.toMatch('failed_delete_employee')
   })
+
+  test('given a valid id should search as expected', async () => {
+    jest.spyOn(employeeRepository, 'search').mockReturnValue(Promise.resolve({
+      id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+      name: 'Renato Kenji Aguena',
+      age: 26,
+      role: 'developer',
+      archived: false,
+      createdAt: '2021-09-20T18:02:00'
+    }))
+    const employee = await employeesService.searchEmployee('452fc281-b0c6-55ad-8493-07d7f44ced21')
+    expect(employee).toEqual({
+      id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+      name: 'Renato Kenji Aguena',
+      age: 26,
+      role: 'developer',
+      archived: false,
+      createdAt: '2021-09-20T18:02:00'
+    })
+  })
+
+  test('given a valid employee to search but disconect of database should throw error as expected', async () => {
+    jest.spyOn(employeeRepository, 'search').mockImplementation(() => { throw new Error('failed_to_connect_to_database') })
+
+    expect(employeesService.searchEmployee('452fc281-b0c6-55ad-8493-07d7f44ced21')).rejects.toMatch('failed_search_employee')
+  })
 })

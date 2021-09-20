@@ -30,6 +30,12 @@ class EmployeesController {
     await employeesService.deleteEmployee(employeeId)
     return NoContent()
   }
+
+  async getEmployee (): Promise<HttpResponse> {
+    const employeeId = this.request.pathParameters.id
+    const employee = await employeesService.searchEmployee(employeeId)
+    return Ok(employee)
+  }
 }
 
 export default EmployeesController

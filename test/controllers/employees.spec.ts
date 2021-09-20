@@ -51,7 +51,7 @@ describe('Employees Controller', () => {
   })
 
   describe('delete employee', () => {
-    test('given a valid id should update as expected', async () => {
+    test('given a valid id should delete as expected', async () => {
       const input = {
         pathParameters: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
       }
@@ -60,6 +60,42 @@ describe('Employees Controller', () => {
   
       const result = await employeeController.deleteEmployee()
       expect(result.statusCode).toBe(204)
+    })
+
+    test.skip('given a invalid id should return error as expected', async () => {
+
+    })
+  })
+
+  describe('search employee', () => {
+    test('given a valid id should search as expected', async () => {
+      const input = {
+        pathParameters: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
+      }
+      jest.spyOn(employeesService, 'searchEmployee').mockReturnValue(Promise.resolve({
+        id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+        name: 'Renato Kenji Aguena',
+        age: 26,
+        role: 'developer',
+        archived: false,
+        createdAt: '2021-09-20T18:02:00'
+      }))
+      const employeeController = new EmployeesController(input)
+  
+      const result = await employeeController.getEmployee()
+      expect(result.statusCode).toBe(200)
+      expect(JSON.parse(result.body)).toEqual({
+        id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+        name: 'Renato Kenji Aguena',
+        age: 26,
+        role: 'developer',
+        archived: false,
+        createdAt: expect.any(String)
+      })
+    })
+
+    test.skip('given a invalid id should return error as expected', async () => {
+
     })
   })
 })

@@ -23,8 +23,15 @@ export default {
       TableName: 'employees',
       Item: employee
     }).promise()
-  }
-  // search: (id) => {
+  },
+  search: async (id): Promise<any> => {
+    const { Item } = await docClient.get({
+      TableName: 'employees',
+      Key: {
+        id
+      }
+    }).promise()
 
-  // },
+    return Item
+  }
 }

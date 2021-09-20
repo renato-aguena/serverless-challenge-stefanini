@@ -1,6 +1,17 @@
 const putFn = jest.fn().mockImplementation(() => ({ promise: jest.fn().mockReturnValue(Promise.resolve({})) }))
+const getFn = jest.fn().mockImplementation(() => ({ promise: jest.fn().mockReturnValue(Promise.resolve({
+  Item: {
+    id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+    name: 'Renato Kenji Aguena',
+    age: 26,
+    role: 'developer',
+    archived: false,
+    createdAt: '2021-09-20T18:02:00'
+  }
+})) }))
 class DocumentClient {
   put = putFn
+  get = getFn
 }
 const DynamoDB = {
   DocumentClient
@@ -47,5 +58,17 @@ describe('Employees Repository', () => {
     
     const deletedEmployee = await employeeRepository.delete(employee)
     expect(deletedEmployee).toEqual({})
+  })
+
+  test('given a valid id should search as expected', async () => {
+    const foundEmployee = await employeeRepository.search('452fc281-b0c6-55ad-8493-07d7f44ced21')
+    expect(foundEmployee).toEqual({
+      id: '452fc281-b0c6-55ad-8493-07d7f44ced21',
+      name: 'Renato Kenji Aguena',
+      age: 26,
+      role: 'developer',
+      archived: false,
+      createdAt: '2021-09-20T18:02:00'
+    })
   })
 })

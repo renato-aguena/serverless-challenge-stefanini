@@ -1,4 +1,4 @@
-import { HttpResponse } from 'controllers/interfaces/http'
+import { HttpResponse } from './../interfaces/http'
 
 export const Ok = (body?: any): HttpResponse => ({
   statusCode: 200,

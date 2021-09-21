@@ -1,4 +1,4 @@
-import { InternalServerError, NoContent, Ok } from './../../../src/controllers/helpers/responses'
+import { InternalServerError, NoContent, Ok } from './../../../src/infrastructure/helpers/responses'
 
 describe('Responses Controller Helpers', () => {
   test('given a valid body should return Ok as expected', async () => {

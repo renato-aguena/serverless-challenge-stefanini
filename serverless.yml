@@ -1,6 +1,7 @@
 service: ${env:SERVICE}
 
 provider:
+  name: aws
   runtime: nodejs14.x
   memorySize: 256
   stage: ${opt:stage, 'dev'}
@@ -9,7 +10,14 @@ provider:
     - Effect: 'Allow'
       Action:
         - lambda:InvokeFunction
-        - lamnda:InvokeAsync
+        - lambda:InvokeAsync
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: [
+        'arn:aws:dynamodb:sa-east-1:${env:ACCOUNT_ID}:table/employees'
+      ]
+  iamManagedPolicies:
+    - 'arn:aws:iam::aws:policy/service-role/AwsLambdaBasicExecutionRole'
       
 plugins:
   - serverless-plugin-typescript
@@ -22,7 +30,7 @@ resources:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Delete
       Properties:
-        TableName: {env:TABLE_EMPLOYEES}
+        TableName: ${env:TABLE_EMPLOYEES}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
@@ -33,7 +41,7 @@ resources:
 
 functions:
   createEmployee:
-    handler: src/controllers/base.postEmployee
+    handler: src/infrastructure/routes/employees/index.postEmployee
     events:
       - http:
           path: /employees
@@ -44,18 +52,21 @@ functions:
               application/json: ${file(.serverless-configurations/schemas/create-employee.json)}
 
   updateEmployee:
-    handler: src/controllers/base.putEmployee
+    handler: src/infrastructure/routes/employees/index.putEmployee
     events:
       - http:
-          path: /employees
+          path: /employees/{id}
           method: put
           cors: true
           request:
+            parameters:
+              paths:
+                id: true
             schema:
               application/json: ${file(.serverless-configurations/schemas/update-employee.json)}
 
   deleteEmployee:
-    handler: src/controllers/base.deleteEmployee
+    handler: src/infrastructure/routes/employees/index.deleteEmployee
     events:
       - http:
           path: /employees/{id}
@@ -67,7 +78,7 @@ functions:
                 id: true
 
   getEmployee:
-    handler: src/controllers/base.getEmployee
+    handler: src/infrastructure/routes/employees/index.getEmployee
     events:
       - http:
           path: /employees/{id}

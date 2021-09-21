@@ -1,5 +1,5 @@
-import EmployeesController from './../../src/controllers/employees.controller'
-import { employeesService } from './../../src/services'
+import EmployeesController from './../../src/presentation/controllers/employees.controller'
+import { employeesService } from './../../src/application/services'
 
 describe('Employees Controller', () => {
   describe('post employee', () => {
@@ -40,7 +40,7 @@ describe('Employees Controller', () => {
           age: 27,
           role: 'Desenvolvedor'
         },
-        pathParameters: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
+        path: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
       }
       jest.spyOn(employeesService, 'updateEmployee').mockReturnValue(Promise.resolve())
       const employeeController = new EmployeesController(input)
@@ -53,7 +53,7 @@ describe('Employees Controller', () => {
   describe('delete employee', () => {
     test('given a valid id should delete as expected', async () => {
       const input = {
-        pathParameters: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
+        path: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
       }
       jest.spyOn(employeesService, 'deleteEmployee').mockReturnValue(Promise.resolve())
       const employeeController = new EmployeesController(input)
@@ -70,7 +70,7 @@ describe('Employees Controller', () => {
   describe('search employee', () => {
     test('given a valid id should search as expected', async () => {
       const input = {
-        pathParameters: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
+        path: { id: '452fc281-b0c6-55ad-8493-07d7f44ced21' }
       }
       jest.spyOn(employeesService, 'searchEmployee').mockReturnValue(Promise.resolve({
         id: '452fc281-b0c6-55ad-8493-07d7f44ced21',

@@ -1,6 +1,6 @@
-import { HttpRequest, HttpResponse } from './interfaces/http'
-import { employeesService } from './../services'
-import { Ok, NoContent } from './helpers/responses'
+import { HttpRequest, HttpResponse } from './../../infrastructure/interfaces/http'
+import { Ok, NoContent } from './../../infrastructure/helpers/responses'
+import { employeesService } from './../../application/services'
 
 class EmployeesController {
   private readonly request: HttpRequest
@@ -17,7 +17,7 @@ class EmployeesController {
 
   async putEmployee (): Promise<HttpResponse> {
     const employee = this.request.body
-    const employeeId = this.request.pathParameters.id
+    const employeeId = this.request.path.id
     await employeesService.updateEmployee({
       id: employeeId,
       employee
@@ -26,13 +26,13 @@ class EmployeesController {
   }
 
   async deleteEmployee (): Promise<HttpResponse> {
-    const employeeId = this.request.pathParameters.id
+    const employeeId = this.request.path.id
     await employeesService.deleteEmployee(employeeId)
     return NoContent()
   }
 
   async getEmployee (): Promise<HttpResponse> {
-    const employeeId = this.request.pathParameters.id
+    const employeeId = this.request.path.id
     const employee = await employeesService.searchEmployee(employeeId)
     return Ok(employee)
   }

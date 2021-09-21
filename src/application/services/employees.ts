@@ -1,14 +1,12 @@
-import { v4 as uuidv4 } from 'uuid'
-import moment from 'moment'
-
-import employeeRepository from './../repository/employee'
+import employeeRepository from './../../repository/employee/employee'
 import { Employee } from './interfaces/employees'
+import { uuid, date } from './helpers'
 
 export const createEmployee = async (employee: Employee): Promise<Employee> => {
   try {
     employee = {
-      id: uuidv4(),
-      createdAt: moment.utc().format('YYYY-MM-DDTHH:mm:ss'),
+      id: uuid.generate(),
+      createdAt: date.dateUtcString(),
       archived: false,
       ...employee
     }
@@ -21,23 +19,15 @@ export const createEmployee = async (employee: Employee): Promise<Employee> => {
 
 export const updateEmployee = async ({ id, employee }: { id: string, employee: Employee}): Promise<void> => {
   try {
-    const employeeUpdate = {
-      id,
-      ...employee
-    }
-    await employeeRepository.update(employeeUpdate)
+    await employeeRepository.update(id, employee)
   } catch (error) {
     throw new Error('failed_update_employee')
   }
 }
 
-export const deleteEmployee = async (id: string): Promise<void> => {
+export const deleteEmployee = (id: string): Promise<void> => {
   try {
-    const employeeDelete = {
-      id,
-      archived: true
-    }
-    await employeeRepository.delete(employeeDelete)
+    return employeeRepository.delete(id)
   } catch (error) {
     throw new Error('failed_delete_employee')
   }
@@ -45,7 +35,7 @@ export const deleteEmployee = async (id: string): Promise<void> => {
 
 export const searchEmployee = async (id: string): Promise<Employee> => {
   try {
-    const employee = await employeeRepository.search(id)
+    const employee = await employeeRepository.searchOne(id)
     return employee
   } catch (error) {
     throw new Error('failed_search_employee')

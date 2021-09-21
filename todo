@@ -1,7 +1,8 @@
 - [x] Husky / Testes coverage %
 - [x] Validators do API Gateway para os bodies de put
 - [x] Tratativa para retorno de erros na controller
-- [ ] Mudar a estrutura para uma com mais cara de Clean Architecture
+- [x] Mudar a estrutura para uma com mais cara de Clean Architecture
+- [x] Ajustar testes de erro no service
 - [ ] README.md
 - [x] Configurar Dynamo no serverless.yml
 - [ ] Publicação na AWS

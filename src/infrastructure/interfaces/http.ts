@@ -5,5 +5,10 @@ export interface HttpResponse {
 
 export interface HttpRequest {
   body?: any
+  path?: any
+}
+
+export interface HttpServerlessRequest {
+  body?: any
   pathParameters?: any
 }

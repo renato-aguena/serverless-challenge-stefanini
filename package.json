@@ -7,7 +7,8 @@
     "lint": "npx eslint ./src/**/*.ts",
     "test": "npx jest",
     "start:dev": "npx sls offline start --stage dev",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy:dev": "npx sls deploy --stage dev"
   },
   "author": "",
   "license": "ISC",
